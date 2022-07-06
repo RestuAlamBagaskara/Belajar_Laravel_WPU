@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use App\Models\Category;
-use App\Models\Post;
-use App\Models\User;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +20,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home', [
-        "title" => "Home"
+        "title" => "Home",
+        'active' => "home",
     ]);
 });
 
@@ -28,7 +29,8 @@ Route::get('/about', function () {
     return view('about', [
         "name" => "Restu Alam",
         "email"=> "restualam41@gmail.com",
-        "title" => "About"
+        "title" => "About",
+        'active' => "about",
     ]);
 });
 
@@ -37,24 +39,13 @@ Route::get('/blog', [PostController::class, 'index']);
 
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
-Route::get('categories/{category:slug}',  function(Category $category){
-    return view('category',[
-        'title' => $category->name,
-        'posts' => $category->posts,
-        'category' => $category->name,
-    ]);
-});
-
 Route::get('/categories', function(){
     return view('categories',[
         'title' => 'Post Categories',
+        'active' => "categories",
         'categories' => Category::all(),
     ]);
 });
 
-Route::get('/author/{author:username}', function(User $author){
-    return view('posts',[
-        'title' => "User Post",
-        'posts' => $author->posts,
-    ]);
-});
+Route::get('/login', [LoginController::class, 'index']);
+Route::get('/register', [RegisterController::class, 'index']);
