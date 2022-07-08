@@ -28,11 +28,12 @@ class DatabaseSeeder extends Seeder
         Post::factory(20)->create();
 
         //Menggunakan Seeder manual
-        // User::create([
-        //     'name' => 'Alam',
-        //     'email' => 'restualam41@gmai.com',
-        //     'password' => bcrypt(12345)
-        // ]);
+        User::create([
+            'name' => 'Alam',
+            'username' => 'Alam',
+            'email' => 'restualam41@gmail.com',
+            'password' => bcrypt('password')
+        ]);
         // User::create([
         //     'name' => 'Rest',
         //     'email' => 'tualam41@gmai.com',
